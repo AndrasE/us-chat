@@ -9,7 +9,7 @@ const Stack = createStackNavigator();
 function ChatStack () {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="chat" component={Chat} />
+      <Stack.Screen name="Us-Chat" component={Chat} />
     </Stack.Navigator>
   )
 }
@@ -21,7 +21,6 @@ function RootNavigator () {
     </NavigationContainer>
   )
 }
-
 
 export default function App() {
   return <RootNavigator/>
