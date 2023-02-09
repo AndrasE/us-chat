@@ -16,8 +16,9 @@ export default function Login({ Navigation }) {
             .catch((err) => Alert.alert("Login error", err.message))
         }
     }
+
     return (
-        <View>
+        <View style={styles.container}>
             <Image source={backImg} style={styles.backImg} />
         </View>
     )
@@ -27,5 +28,10 @@ const styles = StyleSheet.create({
     container: {
         flew: 1,
         backgroundColor: "#fff",
+    },
+    title: {
+        fontSize: 36,
+        fontWeight: "bold",
+        color: "orange",
     }
 })
