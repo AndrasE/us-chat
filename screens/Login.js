@@ -16,5 +16,16 @@ export default function Login({ Navigation }) {
             .catch((err) => Alert.alert("Login error", err.message))
         }
     }
-    return ()
+    return (
+        <View>
+            <Image source={backImg} style={styles.backImg} />
+        </View>
+    )
 };
+
+const styles = StyleSheet.create({
+    container: {
+        flew: 1,
+        backgroundColor: "#fff",
+    }
+})
