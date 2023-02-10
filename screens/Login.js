@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import { StyleSheet, Text, View, Button, Image, SafeAreaView, TouchableOpacity, StatusBar, Alert } from "react-native";
 import { signInWithEmailAndPassword } from "firebase/auth";
+import { TextInput } from "react-native-gesture-handler";
 const backImg = require("../assets/us.jpg");
 
 export default function Login({ Navigation }) {
@@ -19,6 +20,31 @@ export default function Login({ Navigation }) {
     return (
         <View style={styles.container}>
             <Image source={backImg} style={styles.backImg} />
+            <View style={styles.whiteSheet} />
+            <SafeAreaView style={styles.form}>
+                <Text style={styles.title}>Login</Text>
+                <TextInput
+                    style={styles.input}
+                    placeholder="email"
+                    autoCapitalize="none"
+                    keyboardType="email-address"
+                    textContentType="emailAddress"
+                    autoFocus={true}
+                    value={email}
+                    onChangeText={(text) => setEmail(text)}
+                />
+                <Text style={styles.title}>Password</Text>
+                <TextInput
+                    style={styles.input}
+                    placeholder="password"
+                    autoCapitalize="none"
+                    autoCorrect={false}
+                    secureTextEntry={true}
+                    textContentType="password"
+                    value={password}
+                    onChangeText={(text) => setPassword(text)}
+                />
+            </SafeAreaView>
         </View>
     )
 };
@@ -26,15 +52,52 @@ export default function Login({ Navigation }) {
 const styles = StyleSheet.create({
     container: {
         flew: 1,
-        backgroundColor: "white",
+        backgroundColor: "#d9d7d7",
+        height: "100%"
     },
     title: {
-        fontSize: 36,
+        fontWeight: 300,
+        fontSize: 26,
         fontWeight: "bold",
-        color: "orange",
+        color: "black",
+        alignSelf: "center",
+        paddingBottom: 24,
+    },
+    input: {
+        backgroundColor: "#fff",
+        height: 45,
+        marginBottom: 20,
+        fontSize: 35,
+        borderRadius: 15,
+        paddingLeft: 10,
     },
     backImg: {
-      width: "auto",  
-      height: 210,
+        width: "100%",
+        height: 250,
+        position: "absolute",
+        top: 0,
+        resizeMode: "cover",
     },
+    whiteSheet: {
+        width: "100%",
+        height: "72%",
+        position: "absolute",
+        bottom: 0,
+        backgroundColor: "#F0EEED",
+        borderTopLeftRadius: 30,
+    },
+    form: {
+        flex: 1,
+        padding: 20,
+        justifyContent: "center",
+        marginHorizontal: 30,
+    },
+    button: {
+        backgroundColor: "black",
+        height: 58,
+        borderRadius: 10,
+        justifyContent: "center",
+        alignItems: "center",
+        marginTop: 40,
+    }
 })
