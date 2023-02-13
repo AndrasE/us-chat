@@ -1,10 +1,10 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { StyleSheet, Text, View, Button, Image, SafeAreaView, TouchableOpacity, StatusBar, Alert } from "react-native";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { TextInput } from "react-native-gesture-handler";
 const backImg = require("../assets/us.jpg");
 
-export default function Login({ Navigation }) {
+export default function Login({ navigation }) {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -12,8 +12,8 @@ export default function Login({ Navigation }) {
     const onHandleLogin = () => {
         if (email !== "" && password !== "") {
             signInWithEmailAndPassword(auth, email, password)
-            .then(() => console.log("Login sucessful"))
-            .catch((err) => Alert.alert("Login error", err.message))
+                .then(() => console.log("Login sucessful"))
+                .catch((err) => Alert.alert("Login error", err.message))
         }
     }
 
@@ -44,6 +44,15 @@ export default function Login({ Navigation }) {
                     value={password}
                     onChangeText={(text) => setPassword(text)}
                 />
+                <TouchableOpacity style={styles.button} onPress={onHandleLogin}>
+                    <Text style={{ fontWeight: "bold", color: "#fff", fontSize: 18 }}>Login</Text>
+                </TouchableOpacity>
+                <View style={{ marginTop: 20, flexDirection: "row", alignItems: "center", alignSelf: "center" }}>
+                    <Text style={{ color: "gray", fontSize: 14 }}>Dun have account? </Text>
+                    <TouchableOpacity onPress={() => navigation.navigate("Signup")}>
+                        <Text style={{ fontWeight: "bold", color: "black", fontSize: 14 }}>Signup</Text>
+                    </TouchableOpacity>
+                </View>
             </SafeAreaView>
         </View>
     )
@@ -80,7 +89,7 @@ const styles = StyleSheet.create({
     },
     whiteSheet: {
         width: "100%",
-        height: "72%",
+        height: "75%",
         position: "absolute",
         bottom: 0,
         backgroundColor: "#F0EEED",
