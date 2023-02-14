@@ -37,7 +37,14 @@ const Home = () => {
             >
                 <Entypo name="chat" size={24} color={colors.lightGray} />
             </TouchableOpacity>
+            <View style={{ marginTop: 20, flexDirection: "row", alignItems: "center", alignSelf: "center" }}>
+                    <Text style={{ color: "gray", fontSize: 14 }}>Dun have account? </Text>
+                    <TouchableOpacity onPress={() => navigation.navigate("Login")}>
+                        <Text style={{ fontWeight: "bold", color: "black", fontSize: 14 }}>Log</Text>
+                    </TouchableOpacity>
+                </View>
         </View>
+        
     );
     };
 
@@ -51,7 +58,7 @@ const styles = StyleSheet.create({
         backgroundColor: "#fff",   
     },
     chatButton: {
-        backgroundColor: colors.primary,
+        backgroundColor: colors.gray,
         height: 50,
         width: 50, 
         borderRadius: 25,
