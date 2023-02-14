@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, View, Button, Image, SafeAreaView, TouchableOpacity, StatusBar, Alert } from "react-native";
+import { StyleSheet, Text, View, Button, TextInput, Image, SafeAreaView, TouchableOpacity, StatusBar, Alert } from "react-native";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { TextInput } from "react-native-gesture-handler";
+import { auth } from "../config/firebase";
 const backImg = require("../assets/us.jpg");
 
 export default function Login({ navigation }) {

@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import { StyleSheet, Text, View, Button, Image, SafeAreaView, TouchableOpacity, StatusBar, Alert } from "react-native";
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import { TextInput } from "react-native-gesture-handler";
+import React, { useState } from 'react';
+import { StyleSheet, Text, View, Button, TextInput, Image, SafeAreaView, TouchableOpacity, StatusBar, Alert } from "react-native";
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '../config/firebase';
 const backImg = require("../assets/us.jpg");
 
 export default function Signup({ navigation }) {

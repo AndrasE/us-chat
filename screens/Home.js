@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { StyleSheet, Text, View, Button, Image, TouchableOpacity } from "react-native";
-import { Fontawesome } from "@expo/vector-icons";
+import { FontAwesome } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { Entypo } from "@expo/vector-icons"
 import colors from "../colors";
@@ -12,16 +12,16 @@ const Home = () => {
     const navigation = useNavigation();
 
     useEffect(() => {
-        navigator.setOptions({
+        navigation.setOptions({
             headerLeft: () => (
-                <Fontawesome name="search" size={24} color={colors.gray} style={{ margin: 20 }} />
+                <FontAwesome name="search" size={24} color={colors.gray} style={{marginLeft: 15}}/>
             ),
             headerRight: () => (
                 <Image
-                    source={{ url: catImgUrl }}
+                    source={{ uri: catImgUrl }}
                     style={{
                         width: 40,
-                        heigh: 40,
+                        height: 40,
                         marginRight: 15,
                     }}
                 />
@@ -30,12 +30,16 @@ const Home = () => {
     }, [navigation]);
 
     return (
-        <View style={StyleSheet.container}>
-            onPress={() => navigation.navigate("Chat")}
-            style={styles.button}
+        <View style={styles.container}>
+            <TouchableOpacity
+                onPress={() => navigation.navigate("Chat")}
+                style={styles.chatButton}
+            >
+                <Entypo name="chat" size={24} color={colors.lightGray} />
+            </TouchableOpacity>
         </View>
     );
-};
+    };
 
 export default Home;
 
