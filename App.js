@@ -9,20 +9,20 @@ import Login from "./screens/Login";
 import Signup from "./screens/Signup";
 import Home from "./screens/Home";
 
-const Stack = createStackNavigator();
-const AuthenticationUserContext = createContext({});
 
-const AuthenticationUserProvider = ({ children }) => {
+const Stack = createStackNavigator();
+const AuthenticatedUserContext = createContext({});
+
+const AuthenticatedUserProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   return (
-    <AuthenticationUserContext.Provider value={{user, setUser}}>
-       { children }
-       </AuthenticationUserContext.Provider>
+    <AuthenticatedUserContext.Provider value={{ user, setUser }}>
+      {children}
+    </AuthenticatedUserContext.Provider>
   )
 }
 
-
-function ChatStack () {
+function ChatStack() {
   return (
     <Stack.Navigator defaultScreenOptions={Home}>
       <Stack.Screen name="Home" component={Home} />
@@ -31,21 +31,47 @@ function ChatStack () {
   )
 }
 
-function AuthStack () {
-  <Stack.Navigator defaultScreenOptions={Login}>
-  <Stack.Screen name="Login" component={Login} />
-  <Stack.Screen name="Signup" component={Signup} />
-</Stack.Navigator>
+function AuthStack() {
+  return (
+    <Stack.Navigator defaultScreenOptions={Login}>
+      <Stack.Screen name="Login" component={Login} />
+      <Stack.Screen name="Signup" component={Signup} />
+    </Stack.Navigator>
+  )
 }
 
-function RootNavigator () {
+function RootNavigator() {
+  const { user, setUser } = useContext(AuthenticatedUserContext);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth,
+      async authenticatedUser => {
+        authenticatedUser ? setUser(authenticatedUser) : setUser(null);
+        setLoading(false)
+      }
+    )
+    return () => unsubscribe();
+  }, [user]);
+  if (loading) {
+    return (
+      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+        <ActivityIndicator size="large" />
+      </View>
+    )
+  }
+
   return (
     <NavigationContainer>
-      <ChatStack/>
+      {user ? <ChatStack /> : <AuthStack />}
     </NavigationContainer>
   )
 }
 
 export default function App() {
-  return <RootNavigator/>
+  return (
+    <AuthenticatedUserProvider>
+      <RootNavigator />
+    </AuthenticatedUserProvider>
+  )
 }
