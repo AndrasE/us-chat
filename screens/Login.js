@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { StyleSheet, Text, View, Button, TextInput, Image, SafeAreaView, TouchableOpacity, StatusBar, Alert } from "react-native";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { auth } from "../config/firebase";
 const backImg = require("../assets/us.jpg");
 
@@ -16,6 +16,15 @@ export default function Login({ navigation }) {
                 .catch((err) => Alert.alert("Login error", err.message))
         }
     }
+
+    function googleSignIn() {
+        console.log("Login initalized with Google account");
+        const googleAuthProvider = new GoogleAuthProvider();
+        return signInWithPopup(auth, googleAuthProvider)
+            .then(() => console.log("Login sucessful"))
+            .catch((err) => Alert.alert("Login error", err.message))
+    }
+
 
     return (
         <View style={styles.container}>
@@ -44,13 +53,17 @@ export default function Login({ navigation }) {
                     value={password}
                     onChangeText={(text) => setPassword(text)}
                 />
-               
+                <TouchableOpacity style={styles.button} onPress={onHandleLogin}>
+                    <Text style={{ fontWeight: 'bold', color: '#fff', fontSize: 18 }}> Log In</Text>
+                </TouchableOpacity>
+
                 <View style={{ marginTop: 20, flexDirection: "row", alignItems: "center", alignSelf: "center" }}>
                     <Text style={{ color: "gray", fontSize: 14 }}>Dun have account? </Text>
                     <TouchableOpacity onPress={() => navigation.navigate("Signup")}>
                         <Text style={{ fontWeight: "bold", color: "black", fontSize: 14 }}>Signup</Text>
                     </TouchableOpacity>
                 </View>
+                <Button title="google" onPress={googleSignIn}></Button>
             </SafeAreaView>
         </View>
     )
